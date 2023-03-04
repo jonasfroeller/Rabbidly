@@ -1,0 +1,11 @@
+Header 
+Login 
+LanguageSwitch
+Product
+ProductInfo
+Products
+ProductSectionHeadline
+Settings
+ThemeSwitch
+Cart
+Cookies
