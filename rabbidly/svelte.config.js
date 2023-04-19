@@ -3,7 +3,7 @@ import adapterStatic from '@sveltejs/adapter-static'
 const dev = process.argv.includes('dev')
 
 const prefixFolder = false
-const basePath = prefixFolder == true ? (dev ? '' : '/jonasfroeller') : ''
+const basePath = prefixFolder == true ? (dev ? '' : '/Rabbidly') : ''
 const buildDir = prefixFolder == true ? '../public-prefix' : '../public-default'
 
 console.log(`basePath: '${basePath}'`)
