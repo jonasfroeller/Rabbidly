@@ -5,12 +5,13 @@
 	// GlobalCSS/TailwindCSS/DaisyUI
 	import '$main/app.css'
 
+	// Components
 	import Header from '$component/Header.svelte'
 	import Main from '$component/Main.svelte'
 	import Footer from '$component/Footer.svelte'
-
 	import Cookies from '$lib/components/Cookies.svelte'
 
+	// Svelte
 	import { setLocale } from '$translation/i18n-svelte'
 	import { onMount } from 'svelte'
 
@@ -18,19 +19,16 @@
 	export let data
 	setLocale(data.locale)
 
-	import { locale } from '$translation/i18n-svelte'
-	$: lang = $locale
-
 	onMount(async () => {
 		console.log(new Date().toLocaleString()) // hrefBase = "/" + window.location.pathname.split("/")[1] + "/";
 	})
 </script>
 
-<Header hrefBase={`/${lang}/`} />
+<Header />
 
 <Main>
 	<slot />
 	<Cookies />
 </Main>
 
-<Footer hrefBase={`/${lang}/`} />
+<Footer />

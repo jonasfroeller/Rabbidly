@@ -1,8 +1,15 @@
 <script>
+	// Translation
 	import translation from '$translation/i18n-svelte'
+	import { locale } from '$translation/i18n-svelte'
+
+	// Logo
 	import favicon from '$image/favicon.png'
 
-	export let hrefBase = '/en/'
+	// Svelte
+	import { base } from '$app/paths'
+
+	let hrefBase = `${base}/${$locale}/`
 </script>
 
 <footer class="p-4 pt-0 sm:p-6 sm:pt-0">
@@ -21,7 +28,7 @@
 				</h2>
 				<ul>
 					<li class="mb-2">
-						<a href="mailto:rabbidly@protonmail.com" class="hover:underline ">Email</a>
+						<a href="mailto:rabbidly@protonmail.com" class="hover:underline">Email</a>
 					</li>
 				</ul>
 			</div>
@@ -31,17 +38,13 @@
 				</h2>
 				<ul>
 					<li class="mb-2">
-						<a href="https://www.instagram.com/rabbidly" class="hover:underline ">
-							Instagram
-						</a>
+						<a href="https://www.instagram.com/rabbidly" class="hover:underline">Instagram</a>
 					</li>
 					<li class="mb-2">
 						<a href="https://www.tiktok.com/@rabbidly" class="hover:underline">TikTok</a>
 					</li>
 					<li class="mb-2">
-						<a href="https://www.youtube.com/@rabbidly" class="hover:underline">
-							Youtube
-						</a>
+						<a href="https://www.youtube.com/@rabbidly" class="hover:underline">Youtube</a>
 					</li>
 				</ul>
 			</div>

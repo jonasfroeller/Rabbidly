@@ -1,12 +1,25 @@
-<script>
+<script lang="ts">
 	// @ts-nocheck
 	export let active = 'account'
 
+	// Translation
+	import translation from '$translation/i18n-svelte'
+
+	// Scripts
 	import RegexPatterns from '$script/pattern'
+
+	// Components
 	import ThemeSwitch from '$component/ThemeSwitcher.svelte'
 	import LanguageSwitch from '$component/LocaleSwitcher.svelte'
+
+	// Stores
 	import { config } from '$store/styleConfig'
-	$: language = $config.selectedLAN === 'de' ? 'Deutsch' : 'Englisch'
+
+	$: language =
+		$config.selectedLAN === 'de'
+			? $translation.global.languages.german()
+			: $translation.global.languages.english()
+
 	$: colorTheme = $config.theme
 </script>
 
@@ -21,7 +34,7 @@
 				>
 					<span class="icon mr-2"><!-- <Fa icon={faAddressCard} /> --></span>
 					<!-- svelte-ignore a11y-invalid-attribute -->
-					Account
+					{$translation.Settings.account.title()}
 				</li>
 			</a>
 			<a href="./payment" class="block w-fit">
@@ -31,7 +44,7 @@
 						: 'option-chip before:text-secondary before:bg-secondary'}
 				>
 					<span class="icon mr-2"><!-- <Fa icon={faWallet} /> --></span>
-					Payment
+					{$translation.Settings.payment.title()}
 				</li>
 			</a>
 			<a href="./style" class="block w-fit">
@@ -41,7 +54,7 @@
 						: 'option-chip before:text-secondary before:bg-secondary'}
 				>
 					<span class="icon mr-2"><!-- <Fa icon={faPaintRoller} /> --></span>
-					Style
+					{$translation.Settings.style.title()}
 				</li>
 			</a>
 		</ul>
@@ -49,12 +62,12 @@
 	<div class="verticalBorder" />
 	<div id="settings-content">
 		{#if active == 'style'}
-			<div class="flex items-center m-4">
+			<div class="flex items-center m-4 h-12">
 				<label
 					for="color-theme"
-					class="block text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+					class="flex items-center text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
 				>
-					Farbenstil:
+					{$translation.Settings.style.color_theme()}:
 				</label>
 				<div class="relative flex items-center">
 					<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -80,7 +93,7 @@
 						type="text"
 						id="color-theme"
 						name="color-theme"
-						class="block w-full pl-10 p-2.5 input"
+						class="focus:outline-none border border-gray-500 focus:border-gray-200 border-box text-sm rounded-none block w-full pl-10 input"
 						placeholder="color-theme"
 						bind:value={colorTheme}
 						title="color-theme"
@@ -88,9 +101,9 @@
 					<button
 						on:click={() => ($config.theme = 'night')}
 						type="reset"
-						class="block text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-r-lg border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+						class="cursor-pointer gap-2 flex items-center text-sm font-medium text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-r-lg border p-2.5 dark:border-gray-600 dark:placeholder-gray-400 h-12"
 					>
-						default
+						{$translation.global.Button.reset_default()}
 					</button>
 				</div>
 				<!-- Theme -->
@@ -99,18 +112,18 @@
 				</div>
 			</div>
 
-			<div class="flex items-center m-4">
+			<div class="flex items-center flex-wrap m-4">
 				<label
 					for="color-theme"
-					class="block text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+					class="flex items-center text-sm font-medium text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400 h-12"
 				>
-					Sprache:
+					{$translation.Settings.style.language()}:
 				</label>
 				<div class="relative flex items-center">
 					<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 						<svg
 							aria-hidden="true"
-							class="w-5 h-5 "
+							class="w-5 h-5"
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
@@ -130,7 +143,7 @@
 						type="text"
 						id="language"
 						name="language"
-						class="text-sm block w-full pl-10 p-2.5 input"
+						class="focus:outline-none border border-gray-500 focus:border-gray-200 border-box text-sm rounded-none block w-full pl-10 input"
 						placeholder="language"
 						bind:value={language}
 						title="language"
@@ -138,9 +151,9 @@
 					<button
 						on:click={() => ($config.selectedLAN = 'en')}
 						type="reset"
-						class="block text-sm font-medium rounded-r-lg border p-2.5"
+						class="cursor-pointer flex items-center text-sm font-medium text-gray-900 dark:text-white h-12 bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-r-lg border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
 					>
-						default
+						{$translation.global.Button.reset_default()}
 					</button>
 				</div>
 				<!-- Language -->
@@ -149,18 +162,18 @@
 				</div>
 			</div>
 		{:else if active == 'payment'}
-			<div class="flex items-center m-4">
+			<div class="flex items-center m-4 h-12">
 				<label
 					for="credit-card"
-					class="block text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+					class="flex items-center text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
 				>
-					Kreditkarte:
+					{$translation.Settings.payment.credit_card()}:
 				</label>
 				<div class="relative flex items-center">
 					<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 						<svg
 							aria-hidden="true"
-							class="w-5 h-5 "
+							class="w-5 h-5"
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
@@ -180,18 +193,19 @@
 						type="text"
 						id="credit-card"
 						name="credit-card"
-						class="cursor-not-allowed block w-full pl-10 p-2.5"
-						placeholder="credit-card-number"
+						class="cursor-not-allowed focus:outline-none border border-gray-500 focus:border-gray-200 border-box text-sm rounded-none block w-full pl-10 input"
+						placeholder={$translation.Settings.payment.credit_card_number_placeholder()}
 						pattern={RegexPatterns.cardPattern}
 						title="credit-card (Allowed Characters: -., 0-9)"
 					/>
 				</div>
 				<div
-					class="cursor-pointer flex gap-2 text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-r-lg border-l-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+					class="cursor-pointer gap-2 flex items-center text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-r-lg border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
 				>
-					Edit <svg
+					{$translation.global.Button.edit()}
+					<svg
 						aria-hidden="true"
-						class="w-4 h-4 "
+						class="w-4 h-4"
 						fill="none"
 						stroke="currentColor"
 						viewBox="0 0 24 24"
@@ -212,13 +226,13 @@
 					for="country"
 					class="block text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-tl-lg rounded-tr-lg border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
 				>
-					Adresse:
+					{$translation.Settings.payment.address()}:
 				</label>
 				<div class="relative flex items-center">
 					<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 						<svg
 							aria-hidden="true"
-							class="w-5 h-5 "
+							class="w-5 h-5"
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
@@ -244,8 +258,8 @@
 						type="text"
 						id="country"
 						name="country"
-						class="cursor-not-allowed block w-full pl-10 p-2.5 input"
-						placeholder="Land"
+						class="cursor-not-allowed focus:outline-none border border-gray-500 focus:border-gray-200 border-box text-sm rounded-none block w-full pl-10 input"
+						placeholder={$translation.Settings.payment.country()}
 						pattern={RegexPatterns.textPattern}
 						title="country (Allowed Characters: A-z)"
 					/>
@@ -254,7 +268,7 @@
 						readonly
 						id="country-select"
 						name="country-select"
-						class="cursor-not-allowed bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+						class="cursor-not-allowed dark:bg-gray-700 text-gray-900 text-sm dark:text-white h-12 w-min"
 					>
 						<option value="AF">Afghanistan</option>
 						<option value="AX">Åland Islands</option>
@@ -512,7 +526,7 @@
 					<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 						<svg
 							aria-hidden="true"
-							class="w-5 h-5 "
+							class="w-5 h-5"
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
@@ -538,8 +552,8 @@
 						type="text"
 						id="city"
 						name="city"
-						class="cursor-not-allowed block w-full pl-10 p-2.5 input"
-						placeholder="Stadt"
+						class="cursor-not-allowed focus:outline-none border border-gray-500 focus:border-gray-200 border-box text-sm rounded-none block w-full pl-10 input"
+						placeholder={$translation.Settings.payment.city()}
 						pattern={RegexPatterns.textPattern}
 						title="city (Allowed Characters: A-z)"
 					/>
@@ -549,7 +563,7 @@
 					<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 						<svg
 							aria-hidden="true"
-							class="w-5 h-5 "
+							class="w-5 h-5"
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
@@ -575,8 +589,8 @@
 						type="text"
 						id="street"
 						name="street"
-						class="cursor-not-allowed block w-full pl-10 p-2.5 input"
-						placeholder="Straße (+Hausnummer)"
+						class="cursor-not-allowed focus:outline-none border border-gray-500 focus:border-gray-200 border-box text-sm rounded-none block w-full pl-10 input"
+						placeholder={$translation.Settings.payment.street()}
 						pattern={RegexPatterns.textPattern}
 						title="street (Allowed Characters: A-z)"
 					/>
@@ -586,7 +600,7 @@
 					<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 						<svg
 							aria-hidden="true"
-							class="w-5 h-5 "
+							class="w-5 h-5"
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
@@ -612,8 +626,8 @@
 						type="number"
 						id="zipCode"
 						name="zipCode"
-						class="cursor-not-allowed w-full pl-10 p-2.5 input"
-						placeholder="Postleitzahl"
+						class="cursor-not-allowed focus:outline-none border border-gray-500 focus:border-gray-200 border-box text-sm rounded-none block w-full pl-10 input"
+						placeholder={$translation.Settings.payment.zip_code()}
 						pattern={RegexPatterns.numberPattern}
 						title="zipCode (Allowed Characters: 0-9)"
 					/>
@@ -622,9 +636,10 @@
 				<div
 					class="cursor-pointer flex gap-2 text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-bl-lg rounded-br-lg border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
 				>
-					Edit <svg
+					{$translation.global.Button.edit()}
+					<svg
 						aria-hidden="true"
-						class="w-4 h-4 "
+						class="w-4 h-4"
 						fill="none"
 						stroke="currentColor"
 						viewBox="0 0 24 24"
@@ -641,18 +656,18 @@
 			</div>
 		{:else}
 			<div>
-				<div class="flex items-center m-4">
+				<div class="flex items-center m-4 h-12">
 					<label
 						for="username"
-						class="block text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+						class="flex items-center text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
 					>
-						Username:
+						{$translation.Settings.account.username()}
 					</label>
 					<div class="relative flex items-center">
 						<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 							<svg
 								aria-hidden="true"
-								class="w-5 h-5 "
+								class="w-5 h-5"
 								fill="none"
 								stroke="currentColor"
 								viewBox="0 0 24 24"
@@ -670,26 +685,26 @@
 							type="text"
 							id="username"
 							name="username"
-							class="border text-sm rounded-r-lg block w-full pl-10 p-2.5 input"
-							placeholder="username"
+							class="focus:outline-none border-gray-500 focus:border-gray-200 border-box text-sm rounded-none block w-full pl-10 input"
+							placeholder={$translation.Settings.account.username()}
 							pattern={RegexPatterns.usernamePattern}
 							title="username (Allowed Characters: A-z 0-9)"
 						/>
 					</div>
 				</div>
 
-				<div class="flex items-center m-4">
+				<div class="flex items-center m-4 h-12">
 					<label
 						for="firstName"
-						class="block text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+						class="flex items-center text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
 					>
-						Vorname:
+						{$translation.Settings.account.first_name()}
 					</label>
 					<div class="relative flex items-center">
 						<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 							<svg
 								aria-hidden="true"
-								class="w-5 h-5 "
+								class="w-5 h-5"
 								fill="none"
 								stroke="currentColor"
 								viewBox="0 0 24 24"
@@ -708,26 +723,26 @@
 							type="text"
 							id="firstName"
 							name="firstName"
-							class="border text-sm rounded-r-lg block w-full pl-10 p-2.5 input"
-							placeholder="vorname"
+							class="focus:outline-none border-gray-500 focus:border-gray-200 border-box text-sm rounded-none block w-full pl-10 input"
+							placeholder={$translation.Settings.account.first_name()}
 							pattern={RegexPatterns.textPattern}
 							title="firstName (Allowed Characters: A-z)"
 						/>
 					</div>
 				</div>
 
-				<div class="flex items-center m-4">
+				<div class="flex items-center m-4 h-12">
 					<label
 						for="lastName"
-						class="block text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+						class="flex items-center text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
 					>
-						Nachname:
+						{$translation.Settings.account.last_name()}
 					</label>
 					<div class="relative flex items-center">
 						<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 							<svg
 								aria-hidden="true"
-								class="w-5 h-5 "
+								class="w-5 h-5"
 								fill="none"
 								stroke="currentColor"
 								viewBox="0 0 24 24"
@@ -746,26 +761,26 @@
 							type="text"
 							id="lastName"
 							name="lastName"
-							class="border text-sm rounded-r-lg block w-full pl-10 p-2.5 input"
-							placeholder="nachname"
+							class="focus:outline-none border-gray-500 focus:border-gray-200 border-box text-sm rounded-none block w-full pl-10 input"
+							placeholder={$translation.Settings.account.last_name()}
 							pattern={RegexPatterns.textPattern}
 							title="lastName (Allowed Characters: A-z)"
 						/>
 					</div>
 				</div>
 
-				<div class="flex items-center m-4">
+				<div class="flex items-center m-4 h-12">
 					<label
 						for="email"
-						class="block text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+						class="flex items-center text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
 					>
-						Email:
+						{$translation.Settings.account.email()}
 					</label>
 					<div class="relative flex items-center">
 						<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 							<svg
 								aria-hidden="true"
-								class="w-5 h-5 "
+								class="w-5 h-5"
 								fill="none"
 								stroke="currentColor"
 								viewBox="0 0 24 24"
@@ -784,26 +799,26 @@
 							type="email"
 							id="email"
 							name="email"
-							class="border text-sm rounded-r-lg block w-full pl-10 p-2.5 input"
-							placeholder="name@company.com"
+							class="focus:outline-none border-gray-500 focus:border-gray-200 border-box text-sm rounded-none block w-full pl-10 input"
+							placeholder={$translation.Settings.account.email()}
 							pattern={RegexPatterns.emailPattern}
 							title="name@company.com (Allowed Characters: -_. A-z 0-9)"
 						/>
 					</div>
 				</div>
 
-				<div class="flex items-center m-4">
+				<div class="flex items-center m-4 h-12">
 					<label
 						for="phoneNumber"
-						class="block text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+						class="flex items-center text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
 					>
-						Telefonnummer:
+						{$translation.Settings.account.phone_number()}
 					</label>
 					<div class="relative flex items-center">
 						<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 							<svg
 								aria-hidden="true"
-								class="w-5 h-5 "
+								class="w-5 h-5"
 								fill="none"
 								stroke="currentColor"
 								viewBox="0 0 24 24"
@@ -821,26 +836,26 @@
 							type="tel"
 							id="phoneNumber"
 							name="phoneNumber"
-							class="border text-sm rounded-r-lg block w-full pl-10 p-2.5 input"
-							placeholder="+000000000000"
+							class="focus:outline-none border-gray-500 focus:border-gray-200 border-box text-sm rounded-none block w-full pl-10 input"
+							placeholder={$translation.Settings.account.phone_number()}
 							pattern={RegexPatterns.phoneNumberPattern}
 							title="+000000000000 (Allowed Digits: 0-9)"
 						/>
 					</div>
 				</div>
 
-				<div class="flex items-center m-4">
+				<div class="flex items-center m-4 h-12">
 					<label
 						for="password"
-						class="block text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+						class="flex items-center text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
 					>
-						Passwort:
+						{$translation.Settings.account.password()}
 					</label>
 					<div class="relative flex items-center">
 						<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 							<svg
 								aria-hidden="true"
-								class="w-5 h-5 "
+								class="w-5 h-5"
 								fill="none"
 								stroke="currentColor"
 								viewBox="0 0 24 24"
@@ -861,18 +876,19 @@
 							type="password"
 							id="password"
 							name="password"
-							class="cursor-not-allowed w-full pl-10 p-2.5 input"
+							class="cursor-not-allowed focus:outline-none border border-gray-500 focus:border-gray-200 border-box text-sm rounded-none block w-full pl-10 input"
 							placeholder="••••••••"
 							pattern={RegexPatterns.passwordPattern}
 							title="Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character (allowed special characters: !@#$%^&*)"
 						/>
 					</div>
 					<div
-						class="cursor-pointer flex gap-2 text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-r-lg border-l-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+						class="cursor-pointer gap-2 flex items-center text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-r-lg border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
 					>
-						Edit <svg
+						{$translation.global.Button.edit()}
+						<svg
 							aria-hidden="true"
-							class="w-4 h-4 "
+							class="w-4 h-4"
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
@@ -890,7 +906,7 @@
 			</div>
 			<div class="m-4 text-gray-400 dark:text-white text-sm">
 				<div>{'ID: 2371845761'}</div>
-				<div>{'Erstellungsdatum: 19.6.2022'}</div>
+				<div>{`${$translation.Settings.creation_date()}: 19.6.2022`}</div>
 			</div>
 		{/if}
 	</div>

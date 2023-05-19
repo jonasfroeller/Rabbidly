@@ -3,7 +3,7 @@
 	/** @type {import('./$types').PageData} */
 	export let data
 
-	import ProductSectionHeadline from '$component/ProductSectionHeadline.svelte'
+	import Headline from '$component/Headline.svelte'
 	import Products from '$component/Products.svelte'
 	import ProductInfo from '$component/ProductInfo.svelte'
 
@@ -92,6 +92,11 @@
 	<title>product/{data?.category}/{data?.id}</title>
 </svelte:head>
 
-<ProductSectionHeadline style={'single'} prev={getPreviousProduct()} next={getNextProduct()} />
-<ProductInfo product={getCurrentProduct()} />
-<Products productsFiltered={loadProducts()} />
+{#key data?.id}
+	<Headline style={'single'} prev={getPreviousProduct()} next={getNextProduct()} />
+{/key}
+
+{#key data?.id}
+	<ProductInfo product={getCurrentProduct()} />
+	<Products productsFiltered={loadProducts()} />
+{/key}

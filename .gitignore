@@ -47,6 +47,7 @@
 **/*.vscode
 **/*.code-workspace
 **/*node_modules
+**/*todo*.*
 
 # Framework Builds
 **/dist

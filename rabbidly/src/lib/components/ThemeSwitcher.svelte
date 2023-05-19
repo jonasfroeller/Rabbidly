@@ -1,9 +1,14 @@
 <script>
 	// @ts-nocheck
 
+	// Svelte
 	import { browser } from '$app/environment'
 	import { onMount } from 'svelte'
+
+	// Stores
 	import { config } from '$store/styleConfig'
+
+	// Scripts
 	import styleCfg from '$script/styleStorage'
 
 	onMount(async () => {
@@ -14,7 +19,6 @@
 	$: checked = false
 
 	$: {
-		// didn't update other :/
 		if (browser) {
 			;[...document.getElementsByClassName('theme-toggle')].forEach((element) => {
 				element.checked = checked
