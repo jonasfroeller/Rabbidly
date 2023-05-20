@@ -178,12 +178,12 @@ type RootTranslation = {
 	}
 	FileNotFound: {
 		/**
-		 * {​e​r​r​o​r​|​0​}​ ​F​e​h​l​e​r
-		 * @param {unknown} error
+		 * {​E​r​r​o​r​|​0​}​ ​F​e​h​l​e​r
+		 * @param {unknown} Error
 		 */
-		error: RequiredParams<'error|0'>
+		error: RequiredParams<'Error|0'>
 		/**
-		 * z​u​r​ü​c​k​ ​z​u​r​ ​h​o​m​e​p​a​g​e
+		 * Z​u​r​ü​c​k​ ​z​u​r​ ​H​o​m​e​p​a​g​e
 		 */
 		action: string
 	}
@@ -408,11 +408,11 @@ export type TranslationFunctions = {
 	}
 	FileNotFound: {
 		/**
-		 * {error|0} Fehler
+		 * {Error|0} Fehler
 		 */
-		error: (arg: { error: unknown }) => LocalizedString
+		error: (arg: { Error: unknown }) => LocalizedString
 		/**
-		 * zurück zur homepage
+		 * Zurück zur Homepage
 		 */
 		action: () => LocalizedString
 	}

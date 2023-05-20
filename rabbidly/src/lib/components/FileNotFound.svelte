@@ -1,6 +1,9 @@
 <script>
 	// @ts-nocheck
+	// Translation
 	import translation from '$translation/i18n-svelte'
+
+	// Svelte
 	import { browser } from '$app/environment'
 
 	export let code = 404

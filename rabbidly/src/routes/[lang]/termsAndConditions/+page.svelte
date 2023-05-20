@@ -1,7 +1,7 @@
 <svelte:head>
 	<meta name="keywords" content="terms,conditions" />
 
-	<meta property="og:url" content="rabbidly.com/termsAndConditions" />
+	<meta property="og:url" content="https://rabbidly.com/termsAndConditions" />
 	<meta property="og:title" content="terms and conditions" />
 
 	<title>Terms And Conditions</title>

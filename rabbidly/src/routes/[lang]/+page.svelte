@@ -1,5 +1,5 @@
 <script>
-	// Svelte
+	// Components
 	import Headline from '$lib/components/Headline.svelte'
 	import Products from '$lib/components/Products.svelte'
 
@@ -28,7 +28,7 @@
 		content="index,home,rabbit,rapid,rabbidly,onlineshop,cheap,darkmode,bilingual"
 	/>
 
-	<meta property="og:url" content="rabbidly.com" />
+	<meta property="og:url" content="https://rabbidly.com" />
 	<meta property="og:title" content="home" />
 
 	<title>Home</title>

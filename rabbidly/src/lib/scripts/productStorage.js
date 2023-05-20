@@ -9,6 +9,13 @@ export default class productStore {
 				(product) => product.category === config.selectedCategory
 			)
 		}
+
+		if (config.searchInput !== '') {
+			productsFiltered = productsFiltered.filter(
+				(product) => product.name.toLowerCase().includes(config.searchInput.toLowerCase())
+			)
+		}
+
 		return productsFiltered
 	}
 }

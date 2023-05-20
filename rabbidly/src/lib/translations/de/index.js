@@ -64,8 +64,8 @@ const de = {
 		creation_date: 'Erstellungsdatum',
 	},
 	FileNotFound: {
-		error: '{error|0} Fehler',
-		action: 'zurück zur homepage'
+		error: '{Error|0} Fehler',
+		action: 'Zurück zur Homepage'
 	},
 	Header: {
 		search: 'Suche',
@@ -91,6 +91,6 @@ const de = {
 			}
 		}
 	}
-}
+};
 
 export default de

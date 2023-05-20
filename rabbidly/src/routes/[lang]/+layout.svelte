@@ -1,7 +1,7 @@
 <script>
-	// @ts-nocheck
 	// Fonts/Icons
 	import 'iconify-icon'
+
 	// GlobalCSS/TailwindCSS/DaisyUI
 	import '$main/app.css'
 
@@ -11,8 +11,10 @@
 	import Footer from '$component/Footer.svelte'
 	import Cookies from '$lib/components/Cookies.svelte'
 
-	// Svelte
+	// Translation
 	import { setLocale } from '$translation/i18n-svelte'
+
+	// Svelte
 	import { onMount } from 'svelte'
 
 	/** @type { import('./$types').LayoutData } */

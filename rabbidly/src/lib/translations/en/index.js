@@ -12,8 +12,8 @@ const en = {
 			english: 'English'
 		},
 		Button: {
-			reset_default: 'default',
-			edit: 'edit'
+			reset_default: 'Default',
+			edit: 'Edit'
 		}
 	},
 	ProductInfo: {
@@ -23,7 +23,7 @@ const en = {
 		products: "Products",
 		different_products: "Different Products",
 		total_price: "Total Price",
-		no_items: "no items in your cart",
+		no_items: "No items in your cart",
 		shop_now: "Shop Now",
 	},
 	Headline: {
@@ -49,7 +49,7 @@ const en = {
 		payment: {
 			title: 'Payment',
 			credit_card: 'Credit Card',
-			credit_card_number_placeholder: 'credit-card-number',
+			credit_card_number_placeholder: 'Credit-Card-Number',
 			address: 'Address',
 			country: 'Country',
 			city: 'City',
@@ -64,15 +64,15 @@ const en = {
 		creation_date: 'Creation Date',
 	},
 	FileNotFound: {
-		error: '{error|0} Error',
-		action: 'back to homepage'
+		error: '{Error|0} Error',
+		action: 'Back to Homepage'
 	},
 	Header: {
 		search: 'Search',
 		filter: {
-			all: 'all',
-			tech: 'tech',
-			cases: 'case',
+			all: 'All',
+			tech: 'Tech',
+			cases: 'Case',
 		}
 	},
 	Footer: {
@@ -91,6 +91,6 @@ const en = {
 			}
 		}
 	}
-}
+};
 
 export default en

@@ -3,16 +3,23 @@
 	/** @type {import('./$types').PageData} */
 	export let data
 
+	// Translation
+	import { locale } from '$translation/i18n-svelte'
+
+	// Components
 	import Headline from '$component/Headline.svelte'
 	import Products from '$component/Products.svelte'
 	import ProductInfo from '$component/ProductInfo.svelte'
 
-	import { onMount } from 'svelte'
-	import { browser } from '$app/environment'
+	// Svelte
+	import { base } from '$app/paths'
+
+	// Stores
 	import { products } from '$store/products'
 
+	$: hrefBase = `${base}/${$locale}`
+
 	$: productsCopy = [...$products]
-	let splitPathName = null
 
 	function loadProducts() {
 		let filteredProducts = [...productsCopy]
@@ -27,11 +34,9 @@
 	}
 
 	function getCurrentProduct() {
-		// make me work without reload -> take url instead of data params
 		let currentProduct = productsCopy.find(
 			({ id, category }) => id == data?.id && category == data?.category
 		)
-
 		return currentProduct
 	}
 
@@ -42,9 +47,9 @@
 		let previous = null
 
 		if (modifiedIndex > -1) {
-			previous = `../${productsCopy[modifiedIndex]?.category}/${productsCopy[modifiedIndex]?.id}`
+			previous = `${hrefBase}/product/${productsCopy[modifiedIndex]?.category}/${productsCopy[modifiedIndex]?.id}`
 		} else {
-			previous = `../${productsCopy[productsCopy?.length - 1]?.category}/${
+			previous = `${hrefBase}/product/${productsCopy[productsCopy?.length - 1]?.category}/${
 				productsCopy[productsCopy?.length - 1]?.id
 			}`
 		}
@@ -61,22 +66,14 @@
 		let next = null
 
 		if (modifiedIndex < productsCopy.length) {
-			next = `../${productsCopy[modifiedIndex]?.category}/${productsCopy[modifiedIndex]?.id}`
+			next = `${hrefBase}/product/${productsCopy[modifiedIndex]?.category}/${productsCopy[modifiedIndex]?.id}`
 		} else {
-			next = `../${productsCopy[0]?.category}/${productsCopy[0]?.id}`
+			next = `${hrefBase}/product/${productsCopy[0]?.category}/${productsCopy[0]?.id}`
 		}
 
 		console.log('next: ', next)
 
 		return next
-	}
-
-	onMount(async () => {
-		splitPathName = window.location.pathname.split('/')
-	})
-
-	if (browser) {
-		console.log(`product/${data?.category}/${data?.id}`)
 	}
 </script>
 
@@ -84,7 +81,7 @@
 	<meta name="description" content="{getCurrentProduct().content ?? ''}..." />
 	<meta name="keywords" content="product,{data?.category},{data?.id}" />
 
-	<meta property="og:url" content="rabbidly.com/product/{data?.category}/{data?.id}" />
+	<meta property="og:url" content="https://rabbidly.com/product/{data?.category}/{data?.id}" />
 	<meta property="og:title" content="product/{data?.category}/{data?.id}" />
 	<meta property="og:image" content={getCurrentProduct().images[0] ?? ''} />
 	<meta property="og:description" content="{getCurrentProduct().content ?? ''}..." />

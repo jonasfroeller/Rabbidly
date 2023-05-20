@@ -8,12 +8,17 @@
 	export let images
 	export let saved
 
+	// Translation
+	import translation from '$translation/i18n-svelte'
+	import { locale } from '$translation/i18n-svelte'
+
 	// Components
 	import CartManagement from './CartManagement.svelte'
 	let ManageCart
 
 	// Svelte
 	import { dev } from '$app/environment'
+	import { base } from '$app/paths'
 
 	let target = '_self'
 
@@ -27,12 +32,8 @@
 		saved
 	}
 
-	// Translation
-	import translation from '$translation/i18n-svelte'
-	import { locale } from '$translation/i18n-svelte'
-	$: lang = $locale
-
-	$: link = `/${lang}/product/${product.category}/${product.id}`
+	$: hrefBase = `${base}/${$locale}/`
+	$: link = `${hrefBase}product/${product.category}/${product.id}`
 
 	/* $: bookmarkState = product.saved ? 'filled' : 'unfilled'
 	const bookmarkProduct = (element) => {
@@ -45,7 +46,7 @@
 <div class="p-4 w-full border-2 rounded-3xl">
 	<div class="text-block">
 		<div class="flex justify-between">
-			<h1 class="text-3xl flex items-baseline text-primary">
+			<h1 class="text-3xl flex items-baseline text-primary flex-wrap">
 				<a href={link}>{product.name}</a>
 				<span class="ml-1 text-gray-400 text-base">{product.category.toUpperCase()}</span>
 				<a
@@ -130,9 +131,9 @@
 					</p>
 				</div>
 			</div>
-			<div class="flex justify-between mt-2 mb-2">
+			<div class="flex justify-between mt-2 mb-2 flex-wrap">
 				<button
-					on:click={ManageCart.addItem(product)}
+					on:click={ManageCart.addToCart(product)}
 					type="button"
 					class="font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 btn btn-secondary"
 				>
@@ -167,55 +168,6 @@
 						</div>
 					{/each}
 				</div>
-				<!-- Slider controls -->
-				<button
-					type="button"
-					class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-					data-carousel-prev
-				>
-					<span class="inline-flex items-center justify-center btn btn-primary btn-circle">
-						<svg
-							aria-hidden="true"
-							class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M15 19l-7-7 7-7"
-							/>
-						</svg>
-						<span class="sr-only">Previous</span>
-					</span>
-				</button>
-				<button
-					type="button"
-					class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-					data-carousel-next
-				>
-					<span class="inline-flex items-center justify-center btn btn-primary btn-circle">
-						<svg
-							aria-hidden="true"
-							class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M9 5l7 7-7 7"
-							/>
-						</svg>
-						<span class="sr-only">Next</span>
-					</span>
-				</button>
 			</div>
 		</div>
 	</div>

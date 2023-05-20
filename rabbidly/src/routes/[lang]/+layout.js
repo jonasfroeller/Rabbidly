@@ -1,6 +1,10 @@
-// @ts-nocheck
+// Svelte
 import { redirect } from '@sveltejs/kit'
+
+// Scripts
 import { replaceLocaleInUrl } from '$main/utils'
+
+// Translation
 import { baseLocale, locales } from '$translation/i18n-util'
 import { loadLocaleAsync } from '$translation/i18n-util.async'
 

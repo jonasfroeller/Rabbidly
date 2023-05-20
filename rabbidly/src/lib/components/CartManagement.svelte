@@ -11,6 +11,7 @@
 				} else {
 					$shoppingCart = $shoppingCart.filter((cartItem) => cartItem != product)
 				}
+				return
 			}
 		}
 	}
@@ -20,7 +21,19 @@
 			if (item.id === product.id) {
 				product.quantity += 1
 				$shoppingCart = $shoppingCart
+				return
 			}
 		}
+	}
+
+	export const addToCart = (product) => {
+		for (let item of $shoppingCart) {
+			if (item.id === product.id) {
+				product.quantity += 1
+				$shoppingCart = $shoppingCart
+				return
+			}
+		}
+		$shoppingCart = [...$shoppingCart, product]
 	}
 </script>

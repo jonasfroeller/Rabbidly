@@ -4,6 +4,7 @@
 
 	// Translation
 	import translation from '$translation/i18n-svelte'
+	import { locale } from '$translation/i18n-svelte'
 
 	// Scripts
 	import RegexPatterns from '$script/pattern'
@@ -15,18 +16,23 @@
 	// Stores
 	import { config } from '$store/styleConfig'
 
+	// Svelte
+	import { base } from '$app/paths'
+
 	$: language =
 		$config.selectedLAN === 'de'
 			? $translation.global.languages.german()
 			: $translation.global.languages.english()
 
 	$: colorTheme = $config.theme
+
+	$: hrefBase = `${base}/${$locale}/`
 </script>
 
-<div id="settings-box" class="flex justify-between">
+<div id="settings-box" class="flex justify-between lg:flex-row flex-col">
 	<div id="settings-nav">
 		<ul>
-			<a href="./account" class="block w-fit">
+			<a href={hrefBase + 'settings/account'} class="block w-fit">
 				<li
 					class={active == 'account'
 						? 'active option-chip before:text-primary before:bg-primary'
@@ -37,7 +43,7 @@
 					{$translation.Settings.account.title()}
 				</li>
 			</a>
-			<a href="./payment" class="block w-fit">
+			<a href={hrefBase + 'settings/payment'} class="block w-fit">
 				<li
 					class={active == 'payment'
 						? 'active option-chip before:text-primary before:bg-primary'
@@ -47,7 +53,7 @@
 					{$translation.Settings.payment.title()}
 				</li>
 			</a>
-			<a href="./style" class="block w-fit">
+			<a href={hrefBase + 'settings/style'} class="block w-fit">
 				<li
 					class={active == 'style'
 						? 'active option-chip before:text-primary before:bg-primary'
@@ -60,106 +66,106 @@
 		</ul>
 	</div>
 	<div class="verticalBorder" />
-	<div id="settings-content">
+	<div id="settings-content" class="flex flex-col w-full">
 		{#if active == 'style'}
-			<div class="flex items-center m-4 h-12">
-				<label
-					for="color-theme"
-					class="flex items-center text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
-				>
-					{$translation.Settings.style.color_theme()}:
-				</label>
-				<div class="relative flex items-center">
-					<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-						<svg
-							aria-hidden="true"
-							class="w-5 h-5"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
-							/>
-						</svg>
-					</div>
-					<input
-						disabled
-						readonly
-						type="text"
-						id="color-theme"
-						name="color-theme"
-						class="focus:outline-none border border-gray-500 focus:border-gray-200 border-box text-sm rounded-none block w-full pl-10 input"
-						placeholder="color-theme"
-						bind:value={colorTheme}
-						title="color-theme"
-					/>
-					<button
-						on:click={() => ($config.theme = 'night')}
-						type="reset"
-						class="cursor-pointer gap-2 flex items-center text-sm font-medium text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-r-lg border p-2.5 dark:border-gray-600 dark:placeholder-gray-400 h-12"
+			<div class="flex items-center flex-wrap m-4 gap-2">
+				<div class="hidden md:flex">
+					<label
+						for="color-theme"
+						class="flex items-center text-sm font-medium text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400 h-12"
 					>
-						{$translation.global.Button.reset_default()}
-					</button>
+						{$translation.Settings.style.color_theme()}:
+					</label>
+					<div class="relative flex items-center">
+						<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+							<svg
+								aria-hidden="true"
+								class="w-5 h-5"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
+								/>
+							</svg>
+						</div>
+						<input
+							disabled
+							readonly
+							type="text"
+							id="color-theme"
+							name="color-theme"
+							class="focus:outline-none border border-gray-500 focus:border-gray-200 border-box text-sm rounded-none block w-full pl-10 input"
+							placeholder="color-theme"
+							bind:value={colorTheme}
+							title="color-theme"
+						/>
+						<button
+							on:click={() => ($config.theme = 'night')}
+							type="reset"
+							class="cursor-pointer gap-2 flex items-center text-sm font-medium text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-r-lg border p-2.5 dark:border-gray-600 dark:placeholder-gray-400 h-12"
+						>
+							{$translation.global.Button.reset_default()}
+						</button>
+					</div>
 				</div>
 				<!-- Theme -->
-				<div class="outline outline-2 outline-zinc-400 p-2 rounded-full scale-75">
-					<ThemeSwitch />
-				</div>
+				<ThemeSwitch />
 			</div>
 
-			<div class="flex items-center flex-wrap m-4">
-				<label
-					for="color-theme"
-					class="flex items-center text-sm font-medium text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400 h-12"
-				>
-					{$translation.Settings.style.language()}:
-				</label>
-				<div class="relative flex items-center">
-					<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-						<svg
-							aria-hidden="true"
-							class="w-5 h-5"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-							/>
-						</svg>
-					</div>
-					<input
-						disabled
-						readonly
-						type="text"
-						id="language"
-						name="language"
-						class="focus:outline-none border border-gray-500 focus:border-gray-200 border-box text-sm rounded-none block w-full pl-10 input"
-						placeholder="language"
-						bind:value={language}
-						title="language"
-					/>
-					<button
-						on:click={() => ($config.selectedLAN = 'en')}
-						type="reset"
-						class="cursor-pointer flex items-center text-sm font-medium text-gray-900 dark:text-white h-12 bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-r-lg border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+			<div class="flex items-center flex-wrap m-4 gap-2">
+				<div class="hidden md:flex">
+					<label
+						for="color-theme"
+						class="flex items-center text-sm font-medium text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400 h-12"
 					>
-						{$translation.global.Button.reset_default()}
-					</button>
+						{$translation.Settings.style.language()}:
+					</label>
+					<div class="relative flex items-center">
+						<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+							<svg
+								aria-hidden="true"
+								class="w-5 h-5"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+								/>
+							</svg>
+						</div>
+						<input
+							disabled
+							readonly
+							type="text"
+							id="language"
+							name="language"
+							class="focus:outline-none border border-gray-500 focus:border-gray-200 border-box text-sm rounded-none block w-full pl-10 input"
+							placeholder="language"
+							bind:value={language}
+							title="language"
+						/>
+						<button
+							on:click={() => ($config.selectedLAN = 'en')}
+							type="reset"
+							class="cursor-pointer flex items-center text-sm font-medium text-gray-900 dark:text-white h-12 bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-r-lg border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+						>
+							{$translation.global.Button.reset_default()}
+						</button>
+					</div>
 				</div>
 				<!-- Language -->
-				<div class="outline outline-2 outline-zinc-400 p-2 rounded-full scale-75">
-					<LanguageSwitch />
-				</div>
+				<LanguageSwitch />
 			</div>
 		{:else if active == 'payment'}
 			<div class="flex items-center m-4 h-12">
@@ -202,7 +208,9 @@
 				<div
 					class="cursor-pointer gap-2 flex items-center text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-r-lg border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
 				>
-					{$translation.global.Button.edit()}
+					<span class="hidden lg:flex">
+						{$translation.global.Button.edit()}
+					</span>
 					<svg
 						aria-hidden="true"
 						class="w-4 h-4"
@@ -228,47 +236,49 @@
 				>
 					{$translation.Settings.payment.address()}:
 				</label>
-				<div class="relative flex items-center">
-					<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-						<svg
-							aria-hidden="true"
-							class="w-5 h-5"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-							/>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-							/>
-						</svg>
+				<div class="relative flex items-center w-full">
+					<div class="w-full">
+						<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+							<svg
+								aria-hidden="true"
+								class="w-5 h-5"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+								/>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+								/>
+							</svg>
+						</div>
+						<input
+							disabled
+							readonly
+							type="text"
+							id="country"
+							name="country"
+							class="cursor-not-allowed focus:outline-none border border-gray-500 focus:border-gray-200 border-box text-sm rounded-none block w-full pl-10 input"
+							placeholder={$translation.Settings.payment.country()}
+							pattern={RegexPatterns.textPattern}
+							title="country (Allowed Characters: A-z)"
+						/>
 					</div>
-					<input
-						disabled
-						readonly
-						type="text"
-						id="country"
-						name="country"
-						class="cursor-not-allowed focus:outline-none border border-gray-500 focus:border-gray-200 border-box text-sm rounded-none block w-full pl-10 input"
-						placeholder={$translation.Settings.payment.country()}
-						pattern={RegexPatterns.textPattern}
-						title="country (Allowed Characters: A-z)"
-					/>
 					<select
 						disabled
 						readonly
 						id="country-select"
 						name="country-select"
-						class="cursor-not-allowed dark:bg-gray-700 text-gray-900 text-sm dark:text-white h-12 w-min"
+						class="select select-bordered rounded-none cursor-not-allowed max-w-[1rem]"
 					>
 						<option value="AF">Afghanistan</option>
 						<option value="AX">Åland Islands</option>
@@ -852,7 +862,7 @@
 						{$translation.Settings.account.password()}
 					</label>
 					<div class="relative flex items-center">
-						<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+						<div class="absolute inset-y-0 left-0 items-center pl-3 pointer-events-none flex">
 							<svg
 								aria-hidden="true"
 								class="w-5 h-5"
@@ -885,7 +895,9 @@
 					<div
 						class="cursor-pointer gap-2 flex items-center text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-r-lg border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
 					>
-						{$translation.global.Button.edit()}
+						<span class="hidden lg:flex">
+							{$translation.global.Button.edit()}
+						</span>
 						<svg
 							aria-hidden="true"
 							class="w-4 h-4"
@@ -904,7 +916,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="m-4 text-gray-400 dark:text-white text-sm">
+			<div class="m-4 text-sm">
 				<div>{'ID: 2371845761'}</div>
 				<div>{`${$translation.Settings.creation_date()}: 19.6.2022`}</div>
 			</div>
@@ -917,13 +929,6 @@
 	#settings-box {
 		outline: 2px solid #e5e7eb;
 		border-radius: 1rem;
-		min-height: 33rem;
-		width: 100%;
-	}
-
-	#settings-nav {
-		padding: 0.5rem;
-		min-width: 33%;
 	}
 
 	.option-chip {
@@ -931,7 +936,7 @@
 		align-items: center;
 		width: fit-content;
 		outline: 2px solid #e5e7eb;
-		border-radius: 7.5vh;
+		border-radius: 2.5rem;
 		margin: 1rem;
 		padding-right: 1rem;
 		font-size: 1.5rem;
@@ -943,8 +948,8 @@
 		margin-right: 0.5rem;
 		height: 3rem;
 		content: 'a';
-		border-top-left-radius: 7.5vh;
-		border-bottom-left-radius: 7.5vh;
+		border-top-left-radius: 2.5rem;
+		border-bottom-left-radius: 2.5rem;
 	}
 
 	.option-chip::before {
@@ -953,18 +958,12 @@
 		margin-right: 0.5rem;
 		height: 3rem;
 		content: 'n';
-		border-top-left-radius: 7.5vh;
-		border-bottom-left-radius: 7.5vh;
+		border-top-left-radius: 2.5rem;
+		border-bottom-left-radius: 2.5rem;
 	}
 
 	:global().verticalBorder {
 		outline: 1px solid #e5e7eb;
 		max-width: 1px;
-	}
-
-	#settings-content {
-		min-width: 33%;
-		width: 66%;
-		padding: 0.5rem;
 	}
 </style>

@@ -1,72 +1,68 @@
 <script>
-	// @ts-nocheck
 	// Svelte
+	import { base } from '$app/paths'
+
+	// Stores
 	import { config } from '$store/styleConfig'
-	import { dev } from '$app/environment'
-	import { browser } from '$app/environment'
 
 	// Translation
 	import translation from '$translation/i18n-svelte'
+	import { locale } from '$translation/i18n-svelte'
 
-	let target = '_self'
+	export let hrefBase = `${base}/${$locale}/`
 
 	export let style = 'multiple'
 	export let prev = ''
 	export let next = ''
 </script>
 
-{#if style === 'single'}
-	<section id="headline" class="text-primary flex justify-between w-full">
-		<div class="flex justify-between w-full">
-			<a href={prev}>
-				<div
-					class="headline-tag pointer flex items-center w-fit border-2 rounded-3xl p-4 pt-2 pb-2 mb-4 text-2xl"
-				>
-					<h1 class="flex items-center gap-x-0.5 text-primary">
-						<span class="icon"><!-- <Fa icon={faCaretLeft} /> --></span>
-						{$translation.Headline.product.last()}
-					</h1>
-				</div>
-			</a>
-			<a href="../../">
-				<div
-					class="headline-tag pointer flex items-center w-fit border-2 rounded-3xl p-4 pt-2 pb-2 mb-4 text-2xl"
-				>
-					<h1>{$translation.Headline.product.category()}: {$config.selectedCategory}</h1>
-				</div>
-			</a>
-			<a href={next}>
-				<div
-					class="headline-tag pointer flex items-center w-fit border-2 rounded-3xl p-4 pt-2 pb-2 mb-4 text-2xl"
-				>
-					<h1 class="flex items-center gap-x-0.5 text-primary">
-						{$translation.Headline.product.next()}
-						<span class="icon"><!-- <Fa icon={faCaretRight} /> --></span>
-					</h1>
-				</div>
-			</a>
+<section class="flex flex-wrap gap-4 justify-between mb-4">
+	{#if style === 'cart'}
+		<div class="border border-primary text-primary text-xl bg-tertiary-content rounded-lg p-2">
+			<span class="icon pointer"><!-- <Fa icon={faCartShopping} /> --></span>
+			{$translation.Headline.cart()}
 		</div>
-	</section>
-{:else}
-	<section id="headline" class="text-primary flex justify-between w-full">
-		<div class="flex justify-between w-full">
-			<div
-				class="headline-tag pointer flex items-center w-fit border-2 rounded-3xl p-4 pt-2 pb-2 mb-4 text-2xl"
-			>
-				{#if style === 'cart'}
-					<h1 class="flex justify-between items-center">
-						<span class="icon"><!-- <Fa icon={faCartShopping} /> --></span>
-						{$translation.Headline.cart()}
-					</h1>
-				{:else if style === 'settings'}
-					<h1 class="flex justify-between items-center">
-						<div class="icon pointer"><!-- <Fa icon={faGear} /> --></div>
-						{$translation.Headline.settings()}
-					</h1>
-				{:else}
-					<h1>{$translation.Headline.category()}: {$config.selectedCategory}</h1>
-				{/if}
+	{:else if style === 'settings'}
+		<div class="border border-primary text-primary text-xl bg-tertiary-content rounded-lg p-2">
+			<div class="icon pointer"><!-- <Fa icon={faGear} /> --></div>
+			{$translation.Headline.settings()}
+		</div>
+	{:else if style === 'single'}
+		<a
+			href={prev}
+			class="border border-primary text-primary text-xl bg-tertiary-content rounded-lg p-2"
+		>
+			<div>
+				<div>
+					<span class="icon pointer"><!-- <Fa icon={faCaretLeft} /> --></span>
+					{$translation.Headline.product.last()}
+				</div>
 			</div>
+		</a>
+	{:else}
+		<div class="border border-primary text-primary text-xl bg-tertiary-content rounded-lg p-2">
+			{$translation.Headline.category()}: {$config.selectedCategory}
 		</div>
-	</section>
-{/if}
+	{/if}
+	{#if style === 'single'}
+		<a
+			class="border border-primary text-primary text-xl bg-tertiary-content rounded-lg p-2"
+			href={hrefBase}
+		>
+			<div>
+				<div>{$translation.Headline.product.category()}: {$config.selectedCategory}</div>
+			</div>
+		</a>
+		<a
+			class="border border-primary text-primary text-xl bg-tertiary-content rounded-lg p-2"
+			href={next}
+		>
+			<div>
+				<div>
+					{$translation.Headline.product.next()}
+					<span class="icon pointer"><!-- <Fa icon={faCaretRight} /> --></span>
+				</div>
+			</div>
+		</a>
+	{/if}
+</section>

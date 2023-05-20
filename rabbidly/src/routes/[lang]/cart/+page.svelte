@@ -1,17 +1,26 @@
 <script>
+	// Components
 	import Headline from '$component/Headline.svelte'
 	import Products from '$component/Products.svelte'
 	import Cart from '$component/Cart.svelte'
 
-	import translation from '$translation/i18n-svelte'
+	// Svelte
+	import { base } from '$app/paths'
 
+	// Translation
+	import translation from '$translation/i18n-svelte'
+	import { locale } from '$translation/i18n-svelte'
+
+	// Stores
 	import { shoppingCart } from '$store/userData'
+
+	$: hrefBase = `${base}/${$locale}/`
 </script>
 
 <svelte:head>
 	<meta name="keywords" content="cart" />
 
-	<meta property="og:url" content="rabbidly.com/cart" />
+	<meta property="og:url" content="https://rabbidly.com/cart" />
 	<meta property="og:title" content="cart" />
 
 	<title>Cart</title>
@@ -24,16 +33,12 @@
 {#if $shoppingCart.length > 0}
 	<Products productsFiltered={$shoppingCart} />
 {:else}
-	<div class="flex justify-center items-center gap-2 m-6">
-		<button
-			class="font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center btn btn-secondary no-animation"
-		>
-			{$translation.Cart.no_items()}
-		</button>
-		<a href="./">
+	<div class="flex justify-center flex-wrap items-center gap-2 m-6">
+		{$translation.Cart.no_items()}
+		<a href={hrefBase}>
 			<button
 				type="button"
-				class="font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center btn btn-secondary"
+				class="font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center btn btn-secondary h-fit"
 			>
 				<svg
 					aria-hidden="true"

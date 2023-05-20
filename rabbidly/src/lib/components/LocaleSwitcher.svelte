@@ -17,7 +17,7 @@
 	$: $config.selectedLAN = $locale
 
 	const languages = {
-		de: de, 
+		de: de,
 		en: en
 	}
 
@@ -67,7 +67,7 @@
 <svelte:window on:popstate={handlePopStateEvent} />
 
 <!-- https://countryflagsapi.com/png/{selectedLAN} -->
-<div class="h-[3.5rem] w-min flex justify-between">
+<div class="h-12 w-min flex justify-between">
 	<select
 		bind:value={$config.selectedLAN}
 		class:active={$config.selectedLAN === $locale}
@@ -75,7 +75,7 @@
 			switchLocale($config.selectedLAN)
 			styleCfg.save($config)
 		}}
-		class="rounded-l-[7.5rem] bg-base-100 h-full border-2 border-primary select select-primary focus:outline-none"
+		class="rounded-l-lg rounded-r-none bg-base-100 h-12 select select-primary focus:outline-none"
 		name="language"
 	>
 		{#each locales as l}
@@ -85,6 +85,6 @@
 	<div
 		style="background-image: 
 			url({currentFlag});"
-		class="w-[3.5rem] h-[3.5rem] bg-no-repeat bg-cover rounded-r-[7.5rem]"
+		class="w-12 h-12 bg-no-repeat bg-cover rounded-r-lg"
 	/>
 </div>

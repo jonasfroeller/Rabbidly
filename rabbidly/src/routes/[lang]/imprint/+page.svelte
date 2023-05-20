@@ -1,7 +1,7 @@
 <svelte:head>
 	<meta name="keywords" content="imprint" />
 
-	<meta property="og:url" content="rabbidly.com/imprint" />
+	<meta property="og:url" content="https://rabbidly.com/imprint" />
 	<meta property="og:title" content="imprint" />
 
 	<title>Imprint</title>

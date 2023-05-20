@@ -33,7 +33,7 @@ const config = {
 			$store: 'src/lib/stores',
 			$script: 'src/lib/scripts'
 		},
-		prerender: { entries: ['/de/product/technology/2312', '/en/product/technology/2312'] }
+		prerender: { entries: [`/de/product/technology/2312`, `/en/product/technology/2312`] }
 	},
 
 	preprocess: [

@@ -1,7 +1,7 @@
 <svelte:head>
 	<meta name="keywords" content="cookies" />
 
-	<meta property="og:url" content="rabbidly.com/cookies" />
+	<meta property="og:url" content="https://rabbidly.com/cookies" />
 	<meta property="og:title" content="cookies" />
 
 	<title>Cookies</title>

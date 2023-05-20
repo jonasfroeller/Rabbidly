@@ -14,7 +14,7 @@
 
 <footer class="p-4 pt-0 sm:p-6 sm:pt-0">
 	<hr class="my-6 border-gray-200 sm:mx-auto" />
-	<div class="md:flex md:justify-between">
+	<div class="md:flex md:justify-between gap-16">
 		<div class="mb-6 md:mb-0 flex items-center">
 			<a href="https://rabbidly.com" class="flex items-center">
 				<img src={favicon} class="mr-3 h-8" alt="Rabbidly Logo" />

@@ -1,7 +1,7 @@
 <svelte:head>
 	<meta name="keywords" content="privacy policy" />
 
-	<meta property="og:url" content="rabbidly.com/privacyPolicy" />
+	<meta property="og:url" content="https://rabbidly.com/privacyPolicy" />
 	<meta property="og:title" content="privacy policy" />
 
 	<title>Privacy Policy</title>
