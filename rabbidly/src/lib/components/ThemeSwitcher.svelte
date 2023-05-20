@@ -13,18 +13,8 @@
 
 	onMount(async () => {
 		$config = await styleCfg.load()
-		checked = $config.theme == 'night' ? true : false
+		checked = $config.theme == 'luxury' ? true : false
 	})
-
-	$: checked = false
-
-	$: {
-		if (browser) {
-			;[...document.getElementsByClassName('theme-toggle')].forEach((element) => {
-				element.checked = checked
-			})
-		}
-	}
 
 	$: {
 		if (browser) {
@@ -36,18 +26,23 @@
 		$config.theme = $config.theme == 'luxury' ? 'bumblebee' : 'luxury'
 		if (browser) {
 			document.documentElement.setAttribute('data-theme', $config.theme)
+			;[...document.getElementsByClassName('theme-toggle')].forEach((element) => {
+				element.checked = checked
+			})
 		}
 	}
+
+	$: checked = false
 </script>
 
 <input
-	bind:checked
 	role="switch"
 	name="theme"
+	bind:checked
 	on:change={() => {
 		updateTheme()
 		styleCfg.save($config)
 	}}
 	type="checkbox"
-	class="toggle h-12 w-16 rounded-lg border-primary bg-accent"
+	class="theme-toggle toggle h-12 w-16 rounded-lg border-primary bg-accent"
 />

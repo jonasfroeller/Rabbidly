@@ -72,7 +72,7 @@
 				<div class="hidden md:flex">
 					<label
 						for="color-theme"
-						class="flex items-center text-sm font-medium text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400 h-12"
+						class="flex items-center text-sm font-medium bg-primary text-black rounded-l-lg p-2.5 h-12"
 					>
 						{$translation.Settings.style.color_theme()}:
 					</label>
@@ -106,9 +106,9 @@
 							title="color-theme"
 						/>
 						<button
-							on:click={() => ($config.theme = 'night')}
+							on:click={() => ($config.theme = 'luxury')}
 							type="reset"
-							class="cursor-pointer gap-2 flex items-center text-sm font-medium text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-r-lg border p-2.5 dark:border-gray-600 dark:placeholder-gray-400 h-12"
+							class="cursor-pointer text-sm font-medium bg-primary text-black rounded-r-lg p-2.5 h-12"
 						>
 							{$translation.global.Button.reset_default()}
 						</button>
@@ -122,7 +122,7 @@
 				<div class="hidden md:flex">
 					<label
 						for="color-theme"
-						class="flex items-center text-sm font-medium text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400 h-12"
+						class="flex items-center text-sm font-medium bg-primary text-black rounded-l-lg p-2.5 h-12"
 					>
 						{$translation.Settings.style.language()}:
 					</label>
@@ -158,7 +158,7 @@
 						<button
 							on:click={() => ($config.selectedLAN = 'en')}
 							type="reset"
-							class="cursor-pointer flex items-center text-sm font-medium text-gray-900 dark:text-white h-12 bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-r-lg border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+							class="cursor-pointer text-sm font-medium bg-primary text-black rounded-r-lg p-2.5 h-12"
 						>
 							{$translation.global.Button.reset_default()}
 						</button>
@@ -171,7 +171,7 @@
 			<div class="flex items-center m-4 h-12">
 				<label
 					for="credit-card"
-					class="flex items-center text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+					class="flex items-center text-sm font-medium bg-primary text-black rounded-l-lg p-2.5 h-12"
 				>
 					{$translation.Settings.payment.credit_card()}:
 				</label>
@@ -206,7 +206,7 @@
 					/>
 				</div>
 				<div
-					class="cursor-pointer gap-2 flex items-center text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-r-lg border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+					class="flex items-center gap-2 cursor-pointer text-sm font-medium bg-primary text-black rounded-r-lg p-2.5 h-12"
 				>
 					<span class="hidden lg:flex">
 						{$translation.global.Button.edit()}
@@ -232,7 +232,7 @@
 			<div class="flex m-4 flex-col">
 				<label
 					for="country"
-					class="block text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-tl-lg rounded-tr-lg border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+					class="block text-sm font-medium bg-primary text-black rounded-t-lg p-2.5 h-12"
 				>
 					{$translation.Settings.payment.address()}:
 				</label>
@@ -644,7 +644,7 @@
 				</div>
 
 				<div
-					class="cursor-pointer flex gap-2 text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-bl-lg rounded-br-lg border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+					class="cursor-pointer flex gap-2 items-center text-sm font-medium bg-primary text-black rounded-b-lg p-2.5 h-12"
 				>
 					{$translation.global.Button.edit()}
 					<svg
@@ -669,7 +669,7 @@
 				<div class="flex items-center m-4 h-12">
 					<label
 						for="username"
-						class="flex items-center text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+						class="flex items-center text-sm font-medium bg-primary text-black rounded-l-lg p-2.5 h-12"
 					>
 						{$translation.Settings.account.username()}
 					</label>
@@ -706,7 +706,7 @@
 				<div class="flex items-center m-4 h-12">
 					<label
 						for="firstName"
-						class="flex items-center text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+						class="flex items-center text-sm font-medium bg-primary text-black rounded-l-lg p-2.5 h-12"
 					>
 						{$translation.Settings.account.first_name()}
 					</label>
@@ -744,7 +744,7 @@
 				<div class="flex items-center m-4 h-12">
 					<label
 						for="lastName"
-						class="flex items-center text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+						class="flex items-center text-sm font-medium bg-primary text-black rounded-l-lg p-2.5 h-12"
 					>
 						{$translation.Settings.account.last_name()}
 					</label>
@@ -782,7 +782,7 @@
 				<div class="flex items-center m-4 h-12">
 					<label
 						for="email"
-						class="flex items-center text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+						class="flex items-center text-sm font-medium bg-primary text-black rounded-l-lg p-2.5 h-12"
 					>
 						{$translation.Settings.account.email()}
 					</label>
@@ -820,7 +820,7 @@
 				<div class="flex items-center m-4 h-12">
 					<label
 						for="phoneNumber"
-						class="flex items-center text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+						class="flex items-center text-sm font-medium bg-primary text-black rounded-l-lg p-2.5 h-12"
 					>
 						{$translation.Settings.account.phone_number()}
 					</label>
@@ -857,7 +857,7 @@
 				<div class="flex items-center m-4 h-12">
 					<label
 						for="password"
-						class="flex items-center text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-l-lg border-r-0 border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+						class="flex items-center text-sm font-medium bg-primary text-black rounded-l-lg p-2.5 h-12"
 					>
 						{$translation.Settings.account.password()}
 					</label>
@@ -893,7 +893,7 @@
 						/>
 					</div>
 					<div
-						class="cursor-pointer gap-2 flex items-center text-sm font-medium text-gray-900 dark:text-white h-full bg-gray-200 dark:bg-gray-600 border-gray-300 rounded-r-lg border p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
+						class="cursor-pointer flex gap-2 items-center text-sm font-medium bg-primary text-black rounded-r-lg p-2.5 h-12"
 					>
 						<span class="hidden lg:flex">
 							{$translation.global.Button.edit()}

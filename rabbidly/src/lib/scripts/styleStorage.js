@@ -15,7 +15,7 @@ function fillStyleObject(cfg) {
 			cfg.selectedCategory = 'all'
 		}
 		if (cfg.theme == null || cfg.theme == undefined || cfg.theme == '') {
-			cfg.theme = 'night'
+			cfg.theme = 'luxury'
 		}
 		if (cfg.lastVisit == null || cfg.lastVisit == undefined || cfg.lastVisit == '') {
 			cfg.lastVisit = document.referrer
@@ -44,7 +44,7 @@ export default class styleCfg {
 				cfg = {
 					selectedLAN: 'de',
 					selectedCategory: 'all',
-					theme: 'night',
+					theme: 'luxury',
 					lastVisit: document.referrer, // window.history.state.prevUrl history.back(); history.go(-1);
 					searchInput: ''
 				}
